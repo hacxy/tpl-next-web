@@ -6,7 +6,7 @@ test.describe("Homepage", () => {
   });
 
   test("should display the page title", async ({ page }) => {
-    await expect(page).toHaveTitle(/Starter/);
+    await expect(page).toHaveTitle(/Next.js 项目模板/);
   });
 
   test("should display the hero section", async ({ page }) => {
@@ -14,65 +14,93 @@ test.describe("Homepage", () => {
     await expect(hero).toBeVisible();
 
     const heading = hero.locator("h1");
-    await expect(heading).toContainText("构建你的下一个");
+    await expect(heading).toContainText("Next.js 项目模板");
   });
 
-  test("should display navigation links", async ({ page }) => {
+  test("should display the nav logo", async ({ page }) => {
     const nav = page.locator("nav");
     await expect(nav).toBeVisible();
 
-    await expect(nav.getByText("特性")).toBeVisible();
-    await expect(nav.getByText("技术栈")).toBeVisible();
-    await expect(nav.getByText("快速开始")).toBeVisible();
+    await expect(nav.getByText("Next.js Template")).toBeVisible();
   });
 
-  test("should have working CTA button", async ({ page }) => {
-    const cta = page.locator("nav").getByText("立即使用");
-    await expect(cta).toBeVisible();
-  });
-
-  test("should display feature cards", async ({ page }) => {
-    const features = page.locator("#features");
-    await expect(features).toBeVisible();
-
-    await expect(features.getByText("极快的开发体验")).toBeVisible();
-    await expect(features.getByText("组件化架构")).toBeVisible();
-    await expect(features.getByText("生产级性能")).toBeVisible();
-    await expect(features.getByText("一键部署")).toBeVisible();
-  });
-
-  test("should display tech stack pills", async ({ page }) => {
+  test("should display tech stack list", async ({ page }) => {
     const tech = page.locator("#tech");
     await expect(tech).toBeVisible();
 
     await expect(tech.getByText("React 19")).toBeVisible();
     await expect(tech.getByText("TypeScript")).toBeVisible();
-    await expect(tech.getByText("Vite")).toBeVisible();
+    await expect(tech.getByText("Next.js")).toBeVisible();
+    await expect(tech.getByText("Tailwind CSS")).toBeVisible();
+    await expect(tech.getByText("Zustand")).toBeVisible();
+    await expect(tech.getByText("ESLint")).toBeVisible();
+    await expect(tech.getByText("Playwright")).toBeVisible();
+    await expect(tech.getByText("Husky").first()).toBeVisible();
+    await expect(tech.getByText("lint-staged")).toBeVisible();
   });
 
-  test("should display quick start code block", async ({ page }) => {
-    const quickstart = page.locator("#quickstart");
-    await expect(quickstart).toBeVisible();
-
-    await expect(quickstart.getByText("npx create-starter my-app")).toBeVisible();
+  test("should have working tech links", async ({ page }) => {
+    const tech = page.locator("#tech");
+    const reactLink = tech.getByText("React 19").locator("..");
+    await expect(reactLink).toHaveAttribute("href", "https://github.com/facebook/react");
+    await expect(reactLink).toHaveAttribute("target", "_blank");
   });
 
-  test("should have working footer links", async ({ page }) => {
+  test("should have working footer", async ({ page }) => {
     const footer = page.locator("footer");
     await expect(footer).toBeVisible();
 
+    await expect(footer.getByText("Next.js Template · MIT License · 2024")).toBeVisible();
     await expect(footer.getByText("GitHub")).toBeVisible();
-    await expect(footer.getByText("文档")).toBeVisible();
-    await expect(footer.getByText("讨论区")).toBeVisible();
   });
-});
 
-test.describe("Responsive Design", () => {
-  test("should hide nav links on mobile", async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 667 });
-    await page.goto("/");
+  test("should display counter controls", async ({ page }) => {
+    await expect(page.getByRole("button", { name: "减少" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "增加" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "重置" })).toBeVisible();
+    await expect(page.getByTestId("count")).toContainText("0");
+  });
 
-    const navLinks = page.locator(".nav-links");
-    await expect(navLinks).toBeHidden();
+  test("should increment counter", async ({ page }) => {
+    const incrementBtn = page.getByRole("button", { name: "增加" });
+    const count = page.getByTestId("count");
+
+    await incrementBtn.click();
+    await expect(count).toContainText("1");
+    await incrementBtn.click();
+    await expect(count).toContainText("2");
+  });
+
+  test("should decrement counter", async ({ page }) => {
+    const decrementBtn = page.getByRole("button", { name: "减少" });
+    const count = page.getByTestId("count");
+
+    await decrementBtn.click();
+    await expect(count).toContainText("-1");
+  });
+
+  test("should reset counter", async ({ page }) => {
+    const incrementBtn = page.getByRole("button", { name: "增加" });
+    const resetBtn = page.getByRole("button", { name: "重置" });
+    const count = page.getByTestId("count");
+
+    await incrementBtn.click();
+    await incrementBtn.click();
+    await expect(count).toContainText("2");
+    await resetBtn.click();
+    await expect(count).toContainText("0");
+  });
+
+  test("should persist counter after reload", async ({ page }) => {
+    const incrementBtn = page.getByRole("button", { name: "增加" });
+    const count = page.getByTestId("count");
+
+    await incrementBtn.click();
+    await incrementBtn.click();
+    await incrementBtn.click();
+    await expect(count).toContainText("3");
+
+    await page.reload();
+    await expect(count).toContainText("3");
   });
 });

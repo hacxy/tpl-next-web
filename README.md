@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js 项目模板
 
-## Getting Started
+一个极简、现代的 Next.js 项目模板，集成最佳实践，开箱即用。
 
-First, run the development server:
+## 技术栈
+
+- **React 19** v19.2.4 - 用户界面构建库
+- **Next.js** v16.2.10 - React 全栈框架
+- **TypeScript** v5.x - 静态类型检查
+- **Tailwind CSS** v4.x - 原子化 CSS 框架
+- **Zustand** v5.x - 轻量级状态管理
+- **Playwright** v1.x - 端到端测试
+- **ESLint** v9.x - 代码质量检测
+- **Husky** v9.x + **lint-staged** v17.x - Git hooks 管理
+
+## 快速开始
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# 安装依赖
+pnpm install
+
+# 启动开发服务器
 pnpm dev
-# or
-bun dev
+
+# 构建生产版本
+pnpm build
+
+# 启动生产服务器
+pnpm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 测试
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# 运行 E2E 测试
+pnpm test:e2e
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# 带 UI 运行测试
+pnpm test:e2e:ui
 
-## Learn More
+# 调试模式运行测试
+pnpm test:e2e:debug
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 代码质量
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# ESLint 检查
+pnpm lint
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# TypeScript 类型检查
+pnpm type-check
+```
 
-## Deploy on Vercel
+## 项目结构
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+├── app/
+│   ├── layout.tsx      # 根布局
+│   ├── page.tsx        # 首页
+│   └── globals.css     # 全局样式
+└── stores/
+    ├── useAppStore.ts  # Zustand store 示例
+    └── index.ts        # 统一导出
+tests/
+└── e2e/
+    └── home.spec.ts    # E2E 测试用例
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 许可证
+
+MIT
