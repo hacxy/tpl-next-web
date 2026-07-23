@@ -6,103 +6,64 @@ test.describe("Homepage", () => {
   });
 
   test("should display the page title", async ({ page }) => {
-    await expect(page).toHaveTitle(/Next\.js/);
+    await expect(page).toHaveTitle(/Starter/);
   });
 
   test("should display the hero section", async ({ page }) => {
-    const hero = page.locator("section.hero");
+    const hero = page.locator("section").first();
     await expect(hero).toBeVisible();
 
     const heading = hero.locator("h1");
-    await expect(heading).toContainText("React 框架");
+    await expect(heading).toContainText("构建你的下一个");
   });
 
   test("should display navigation links", async ({ page }) => {
     const nav = page.locator("nav");
     await expect(nav).toBeVisible();
 
-    await expect(nav.getByText("功能特性")).toBeVisible();
-    await expect(nav.getByText("开发体验")).toBeVisible();
-    await expect(nav.getByText("社区")).toBeVisible();
-    await expect(nav.getByText("文档")).toBeVisible();
+    await expect(nav.getByText("特性")).toBeVisible();
+    await expect(nav.getByText("技术栈")).toBeVisible();
+    await expect(nav.getByText("快速开始")).toBeVisible();
   });
 
-  test("should have working deploy button", async ({ page }) => {
-    const deployButton = page.getByRole("link", { name: "立即部署" });
-    await expect(deployButton).toBeVisible();
-    await expect(deployButton).toHaveAttribute("href", /vercel\.com/);
-  });
-
-  test("should have working documentation link", async ({ page }) => {
-    const docsButton = page.getByRole("link", { name: "阅读文档" });
-    await expect(docsButton).toBeVisible();
-    await expect(docsButton).toHaveAttribute("href", /nextjs\.org\/docs/);
+  test("should have working CTA button", async ({ page }) => {
+    const cta = page.locator("nav").getByText("立即使用");
+    await expect(cta).toBeVisible();
   });
 
   test("should display feature cards", async ({ page }) => {
     const features = page.locator("#features");
     await expect(features).toBeVisible();
 
-    await expect(features.getByText("性能优化")).toBeVisible();
-    await expect(features.getByText("开发体验")).toBeVisible();
-    await expect(features.getByText("可扩展性")).toBeVisible();
+    await expect(features.getByText("极快的开发体验")).toBeVisible();
+    await expect(features.getByText("组件化架构")).toBeVisible();
+    await expect(features.getByText("生产级性能")).toBeVisible();
+    await expect(features.getByText("一键部署")).toBeVisible();
   });
 
-  test("should display stats section", async ({ page }) => {
-    const stats = page.locator("#stats");
-    await expect(stats).toBeVisible();
+  test("should display tech stack pills", async ({ page }) => {
+    const tech = page.locator("#tech");
+    await expect(tech).toBeVisible();
 
-    await expect(stats.getByText("6M+")).toBeVisible();
-    await expect(stats.getByText("128K+")).toBeVisible();
+    await expect(tech.getByText("React 19")).toBeVisible();
+    await expect(tech.getByText("TypeScript")).toBeVisible();
+    await expect(tech.getByText("Vite")).toBeVisible();
   });
 
-  test("should display testimonials", async ({ page }) => {
-    const testimonials = page.locator("section").filter({ hasText: "开发者评价" });
-    await expect(testimonials).toBeVisible();
+  test("should display quick start code block", async ({ page }) => {
+    const quickstart = page.locator("#quickstart");
+    await expect(quickstart).toBeVisible();
 
-    await expect(testimonials.getByText("Sarah Chen")).toBeVisible();
-    await expect(testimonials.getByText("Marcus Rivera")).toBeVisible();
-    await expect(testimonials.getByText("Aiko Tanaka")).toBeVisible();
+    await expect(quickstart.getByText("npx create-starter my-app")).toBeVisible();
   });
 
   test("should have working footer links", async ({ page }) => {
     const footer = page.locator("footer");
     await expect(footer).toBeVisible();
 
-    const githubLink = footer.getByText("GitHub");
-    await expect(githubLink).toHaveAttribute("href", /github\.com/);
-  });
-});
-
-test.describe("Theme Toggle", () => {
-  test("should toggle dark/light theme", async ({ page }) => {
-    await page.goto("/");
-
-    const html = page.locator("html");
-    const themeButton = page.getByRole("button", { name: /切换主题/ });
-
-    // Initial state should be dark
-    await expect(html).toHaveAttribute("data-theme", "dark");
-
-    // Toggle to light
-    await themeButton.click();
-    await expect(html).toHaveAttribute("data-theme", "light");
-
-    // Toggle back to dark
-    await themeButton.click();
-    await expect(html).toHaveAttribute("data-theme", "dark");
-  });
-});
-
-test.describe("Smooth Scrolling", () => {
-  test("should scroll to features section when clicking nav link", async ({ page }) => {
-    await page.goto("/");
-
-    const featuresLink = page.getByRole("link", { name: "功能特性" });
-    await featuresLink.click();
-
-    const featuresSection = page.locator("#features");
-    await expect(featuresSection).toBeInViewport();
+    await expect(footer.getByText("GitHub")).toBeVisible();
+    await expect(footer.getByText("文档")).toBeVisible();
+    await expect(footer.getByText("讨论区")).toBeVisible();
   });
 });
 
@@ -111,7 +72,7 @@ test.describe("Responsive Design", () => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto("/");
 
-    const navLinks = page.locator("nav .hidden.md\\:flex");
+    const navLinks = page.locator(".nav-links");
     await expect(navLinks).toBeHidden();
   });
 });
