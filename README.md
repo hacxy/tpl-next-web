@@ -1,73 +1,73 @@
-# Next.js 项目模板
+# Next.js Project Template
 
-一个极简、现代的 Next.js 项目模板，集成最佳实践，开箱即用。
+A minimal, modern Next.js project template with best practices built-in.
 
-## 技术栈
+## Tech Stack
 
-- **React 19** v19.2.4 - 用户界面构建库
-- **Next.js** v16.2.10 - React 全栈框架
-- **TypeScript** v5.x - 静态类型检查
-- **Tailwind CSS** v4.x - 原子化 CSS 框架
-- **Zustand** v5.x - 轻量级状态管理
-- **Playwright** v1.x - 端到端测试
-- **ESLint** v9.x - 代码质量检测
-- **Husky** v9.x + **lint-staged** v17.x - Git hooks 管理
+- **React 19** v19.2.4 - UI library
+- **Next.js** v16.2.10 - React full-stack framework
+- **TypeScript** v5.x - Static type checking
+- **Tailwind CSS** v4.x - Utility-first CSS framework
+- **Zustand** v5.x - Lightweight state management
+- **Playwright** v1.x - End-to-end testing
+- **ESLint** v9.x - Code quality linting
+- **Husky** v9.x + **lint-staged** v17.x - Git hooks management
 
-## 快速开始
+## Getting Started
 
 ```bash
-# 安装依赖
+# Install dependencies
 pnpm install
 
-# 启动开发服务器
+# Start development server
 pnpm dev
 
-# 构建生产版本
+# Build for production
 pnpm build
 
-# 启动生产服务器
+# Start production server
 pnpm start
 ```
 
-## 测试
+## Testing
 
 ```bash
-# 运行 E2E 测试
+# Run E2E tests
 pnpm test:e2e
 
-# 带 UI 运行测试
+# Run tests with UI
 pnpm test:e2e:ui
 
-# 调试模式运行测试
+# Run tests in debug mode
 pnpm test:e2e:debug
 ```
 
-## 代码质量
+## Code Quality
 
 ```bash
-# ESLint 检查
+# ESLint check
 pnpm lint
 
-# TypeScript 类型检查
+# TypeScript type check
 pnpm type-check
 ```
 
-## 项目结构
+## Project Structure
 
 ```
 src/
 ├── app/
-│   ├── layout.tsx      # 根布局
-│   ├── page.tsx        # 首页
-│   └── globals.css     # 全局样式
+│   ├── layout.tsx      # Root layout
+│   ├── page.tsx        # Home page
+│   └── globals.css     # Global styles
 └── stores/
-    ├── useAppStore.ts  # Zustand store 示例
-    └── index.ts        # 统一导出
+    ├── useAppStore.ts  # Zustand store example
+    └── index.ts        # Barrel export
 tests/
 └── e2e/
-    └── home.spec.ts    # E2E 测试用例
+    └── home.spec.ts    # E2E test cases
 ```
 
-## 许可证
+## License
 
 MIT
