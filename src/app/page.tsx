@@ -99,10 +99,22 @@ function TechStack() {
       href: "https://github.com/pmndrs/zustand",
     },
     {
+      name: "Drizzle ORM",
+      version: "0.45",
+      desc: "类型安全的 TypeScript ORM，轻量级，serverless 友好。",
+      href: "https://github.com/drizzle-team/drizzle-orm",
+    },
+    {
       name: "ESLint",
       version: "9.x",
       desc: "代码质量检测工具，统一编码规范，自动发现潜在问题。",
       href: "https://github.com/eslint/eslint",
+    },
+    {
+      name: "Prettier",
+      version: "3.x",
+      desc: "代码格式化工具，自动统一代码风格。",
+      href: "https://github.com/prettier/prettier",
     },
     {
       name: "Playwright",

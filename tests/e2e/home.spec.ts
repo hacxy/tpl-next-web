@@ -29,11 +29,13 @@ test.describe("Homepage", () => {
     await expect(tech).toBeVisible();
 
     await expect(tech.getByText("React 19")).toBeVisible();
-    await expect(tech.getByText("TypeScript")).toBeVisible();
+    await expect(tech.getByText("TypeScript").first()).toBeVisible();
     await expect(tech.getByText("Next.js")).toBeVisible();
     await expect(tech.getByText("Tailwind CSS")).toBeVisible();
     await expect(tech.getByText("Zustand")).toBeVisible();
+    await expect(tech.getByText("Drizzle ORM")).toBeVisible();
     await expect(tech.getByText("ESLint")).toBeVisible();
+    await expect(tech.getByText("Prettier")).toBeVisible();
     await expect(tech.getByText("Playwright")).toBeVisible();
     await expect(tech.getByText("Husky").first()).toBeVisible();
     await expect(tech.getByText("lint-staged")).toBeVisible();
